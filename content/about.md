@@ -10,7 +10,7 @@ comment: false
 mathjax: false
 ---
 
-Hugo is a static site engine written in Go. test
+Hugo is a static site engine written in Go. test test
 
 
 It makes use of a variety of open source projects including:

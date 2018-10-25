@@ -6,6 +6,17 @@ if [ $# -lt  1 ]; then
 fi
 
 msg="$1"
+git add .
+git commit -m "$msg"
+if [ $? -ne 0 ]; then
+    echo "Commit failed"
+    exit 1
+fi
+git push origin master
+if [ $? -ne 0 ]; then
+    echo "Push failed"
+fi
+
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Build the project.
@@ -13,9 +24,6 @@ hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
 
 # Go To Public folder
 cd public
-set -e
-git checkout master
-git fetch
 # Add changes to git.
 git add .
 
