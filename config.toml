@@ -114,7 +114,7 @@ defaultContentLanguage = "zh-cn"           # Default language to use
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
     owner = "whqfor"              # Your GitHub ID
-    repo = "https://github.com/whqfor/comments.git"               # The repo to store comments
+    repo = "comments"               # The repo to store comments
     clientId = "14a6132677bb291b5ecc"           # Your client ID
     clientSecret = "e88f98e982b4fbc618ca22e806874ffe48232ce7"       # Your client secret
 
