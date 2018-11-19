@@ -109,14 +109,14 @@ defaultContentLanguage = "zh-cn"           # Default language to use
     slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
     fancyboxJs = '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>'
     fancyboxCss = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">'
-    gitmentJS = '<script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js" crossorigin="anonymous"></script>'
-    gitmentCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css" crossorigin="anonymous">'
+    gitmentJS = '<script src="https://billts.site/js/gitment.js"></script>'
+    gitmentCSS = '<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">'
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
     owner = "whqfor"              # Your GitHub ID
-    repo = "comments"               # The repo to store comments
-    clientId = "2b2cdf4a6c3df1b64393"           # Your client ID
-    clientSecret = "23d7e24d1a47ae41a629d8a601688cf29c11464d"       # Your client secret
+    repo = "https://github.com/whqfor/comments.git"               # The repo to store comments
+    clientId = "14a6132677bb291b5ecc"           # Your client ID
+    clientSecret = "e88f98e982b4fbc618ca22e806874ffe48232ce7"       # Your client secret
 
 
   [params.reward]                                         # 文章打赏
