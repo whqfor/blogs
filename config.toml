@@ -7,8 +7,8 @@ theme = "jane"
 hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
 paginate = 5                                              # 首页每页显示的文章数
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
-disqusShortname = ""      # disqus_shortname
-googleAnalytics = ""      # UA-XXXXXXXX-X
+#disqusShortname = ""      # disqus_shortname
+#googleAnalytics = ""      # UA-XXXXXXXX-X
 copyright = "whqfor"            # default: author.name ↓        # 默认为下面配置的author.name ↓
 # uglyURLs = true         # more info: https://gohugo.io/content-management/urls/#ugly-urls
 
@@ -51,10 +51,10 @@ defaultContentLanguage = "zh-cn"           # Default language to use
   weight = 40
   identifier = "categories"
   url = "/categories/"
-[[menu.main]]
-  name = "github"
-  weight = 50
-  url = "https://github.com/whqfor"
+#[[menu.main]]
+  #name = "github"
+  #weight = 50
+  #url = "https://github.com/whqfor"
 
 
 [params]
@@ -114,9 +114,9 @@ defaultContentLanguage = "zh-cn"           # Default language to use
 
   [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
     owner = "whqfor"              # Your GitHub ID
-    repo = "git@github.com:whqfor/blogs.git"               # The repo to store comments
-    clientId = ""           # Your client ID
-    clientSecret = ""       # Your client secret
+    repo = "comments"               # The repo to store comments
+    clientId = "2b2cdf4a6c3df1b64393"           # Your client ID
+    clientSecret = "23d7e24d1a47ae41a629d8a601688cf29c11464d"       # Your client secret
 
 
   [params.reward]                                         # 文章打赏
@@ -125,13 +125,13 @@ defaultContentLanguage = "zh-cn"           # Default language to use
     alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
-    a-email = "whqfor@126.com"
+    a-email = "mailto:whqfor@126.com"
     #b-stack-overflow = "http://localhost:1313"
     #c-twitter = "http://localhost:1313"
     #d-facebook = "http://localhost:1313"
     #e-linkedin = "http://localhost:1313"
     #f-google = "http://localhost:1313"
-    #g-github = "http://localhost:1313"
+    g-github = "https://github.com/whqfor"
     #h-weibo = "http://localhost:1313"
     #i-zhihu = "http://localhost:1313"
     #j-douban = "http://localhost:1313"

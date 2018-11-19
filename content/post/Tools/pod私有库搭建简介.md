@@ -5,12 +5,11 @@ date: 2018-11-01T14:50:23+08:00
 lastmod: 2018-11-09T14:5201+08:00
 draft: false
 tags: ["podspec", "CocoaPods"]
-categories: ["工具", "私有库"]
+categories: ["Tools", "iOS"]
 ---
 
-[TOC]
 
-###简述
+### 简述
 `Cocoapods`是个非常好的`iOS`依赖管理工具，可以方便的进行管理和更新使用到的第三方库，以及在做代码模组件化管理的时候，可以用它来管理私有库。
 `Cocoapods`的[安装](https://segmentfault.com/a/1190000011428874)、[使用](https://segmentfault.com/a/1190000012269216)比较基础，这里不再赘述，网络上有很多资料。这篇文章主要介绍在`Git`环境下如何搭建自己的私有仓库，用以管理项目中的小模块。
 在搭建自己的私有库之前先看一下pod的工作过程：
@@ -27,7 +26,7 @@ pod setup/pod update
 `cocoapods`其实就是利用所维护的podspec文件，在使用方和提供方之间建立起一个桥梁，并利用与项目关联的pod项目去维护所有第三方。
 如果想搭建一个自己的私有仓库，则在本地需要搭建一个自己的`repo`仓库来管理保存自己的podspec文件。
 
-###创建步骤
+### 创建步骤
 ```
 1.创建私有的Specs git库
 2.在私有库项目中创建podspec文件
@@ -37,7 +36,7 @@ pod setup/pod update
 6.更新维护podspec
 7.示例地址
 ```
-####1.创建私有的Specs git库
+#### 1.创建私有的Specs git库
 将私有`repo` 添加到 `Cocoapods`的格式是
 ```
 $ pod repo add [repo名] [repo git地址]
@@ -64,7 +63,7 @@ master
 - Path: /Users/whqfor/.cocoapods/repos/master
 ```
 目前本地的私有repo是个空文件，先不要着急，一会还会对它进行操作，不需要手动更改。
-####2.在私有库项目中创建podspec文件
+#### 2.在私有库项目中创建podspec文件
 按照[官方教程](https://guides.cocoapods.org/syntax/podspec.html)来编辑即可，下面是在写本文时创建的示例podspec
 
 ```
@@ -94,7 +93,7 @@ end
 ```
 如果不清楚的话，网上相应的文章挺多的，这一步并不复杂。
 编写完之后放到git仓库下即可，和工程同级目录。
-####3.验证私有库的合法性
+#### 3.验证私有库的合法性
 这是我在创建私有库时遇到问题最多的地方，尝试编译了半天。
 在本地git仓库目录下，选择执行如下命令
 ```
@@ -129,19 +128,19 @@ s.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULE
 ```
 TNetwork passed validation.
 ```
-####4.提交私有库的版本信息
+#### 4.提交私有库的版本信息
 podspec文件中获取Git版本控制的项目还需要tag号，所以我们要打上一个tag，在工程目录下，终端执行
 ```
 $ git tag -m "first release" "0.0.1"
 $ git push --tags     #推送tag到远端仓库
 ```
-####5.向Spec Repo提交podspec
+#### 5.向Spec Repo提交podspec
 接下来将刚才的0.0.1版本的podspec提交到私有仓库中
 ```
 $ pod repo push HQSpecs /Users/whqfor/TNetwork/TNetwork.podspec --allow-warnings
 ```
 如果选择忽略警告的话可以加上--allow-warnings
-####6.更新维护podspec
+#### 6.更新维护podspec
 之后如果需要发新的版本，和上诉流程基本一致，编辑好自己的库文件，打上tag提交到远端后，更新下podspec文件，执行第四步验证过之后，就可以继续按照第五步提交repo了。
 
 ```
@@ -164,7 +163,7 @@ $ pod repo remove WTSpecs
 $ pod repo add HQSpecs https://github.com/CocoaPods/Specs.git
 ```
 
-####7.示例地址
+#### 7.示例地址
 
 在尝试的过程中，版本号没变化的话，之前pod install可能有缓存。在`~/Library/Caches/CocoaPods/`路径下找到缓存的库，直接删除即可。
 
@@ -172,13 +171,13 @@ HQSpecs仓库里放置的是podspec文件，有自己对应的git地址，podspe
 
 以上即是只做了一个简单的私有库制作，后续会再完善下subspec制作，如果以后组件化的路上积攒更多的经验会持续更新。
 
-[本文HQSpec地址](https://github.com/whqfor/HQSpecs)
+[本文HQSpec地址](https://github.com/whqfor/HQSpecs)  
 [本文podspec文件对应工程地址](https://github.com/whqfor/TNetwork)
 
 
-####参考文章
-[使用Cocoapods创建私有podspec](http://www.cocoachina.com/ios/20150228/11206.html)
-[Cocoapods整理（三）——编写podspec文件](https://segmentfault.com/a/1190000012269307)
+### 参考文章
+[使用Cocoapods创建私有podspec](http://www.cocoachina.com/ios/20150228/11206.html)  
+[Cocoapods整理（三）——编写podspec文件](https://segmentfault.com/a/1190000012269307)  
 [podSpec文件相关知识整理](https://www.cnblogs.com/richard-youth/p/6272932.html)
 
 
