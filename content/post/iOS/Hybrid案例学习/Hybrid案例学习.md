@@ -15,7 +15,7 @@ categories: ["iOS"]
 	Cordova对web的性能提升没做优化，甚至由于其经过Cordova.js的处理还略有降低，比如在Cordova编写的web页面中，想要打开一个链接，由于Cordova.js中的消息拦截并不能直接打开，需要相应的plugin去处理，否则无法打开。
 
 Cordova的优势在于，使用这套框架可以便捷的和原生Api进行交互。其框架如下图：
-![架构图](cordova.png)
+![架构图](https://raw.githubusercontent.com/whqfor/whqfor.github.io/master/post/iOS/Hybrid案例学习/cordova.png)
 
 Cordova框架 主要由三部分组成：`WebView` `Web App` `Plugins`。
 使用这套框架可以进行跨平台开发或者单端平台开发。
