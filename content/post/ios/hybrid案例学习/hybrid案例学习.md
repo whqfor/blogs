@@ -16,7 +16,7 @@ categories: ["iOS"]
 
 Cordova的优势在于，使用这套框架可以便捷的和原生Api进行交互。其框架如下图：
 ![架构图](https://upload-images.jianshu.io/upload_images/273788-b579bc49af3f88b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/843)
-
+测试
 Cordova框架 主要由三部分组成：`WebView` `Web App` `Plugins`。
 使用这套框架可以进行跨平台开发或者单端平台开发。
 >WebvView：提供开发的承载容器，可以作为组件使用，在iOS中采用UIWebView作为承载。
