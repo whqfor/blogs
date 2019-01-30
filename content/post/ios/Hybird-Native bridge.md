@@ -1,4 +1,11 @@
-###Hybird-Native bridge
+---
+title: "Hybrid-Native Birdge"
+date: 2019-01-29T14:50:23+08:00
+lastmod: 2019-01-29T20:5201+08:00
+draft: false
+tags: ["Hybrid"]
+categories: ["iOS"]
+---
 
 
 Hybird-JS侧的逻辑参考这里[同事简书](https://www.jianshu.com/p/0f46941d55ef)，以后有时间自己再完善一下。
