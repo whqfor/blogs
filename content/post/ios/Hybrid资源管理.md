@@ -25,16 +25,16 @@ categories: ["iOS"]
         "h5_modul_id": "12345765432",
         "h5_resource_name": "serviceName",
         "h5_resource_version": "1.1",
-        "h5_resource_download_url": "http://cdn.dahai.com/client/html.zip",
-        "h5_resource_route_uri": "dahai://hybrid/moduleA",
+        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
+        "h5_resource_route_uri": "Test://hybrid/moduleA",
         "h5_resource_index": "/modules/test/test.html"
     },
     "moduleB": {
         "h5_modul_id": "12345760001",
         "h5_resource_name": "serviceName",
         "h5_resource_version": "1.0",
-        "h5_resource_download_url": "http://cdn.dahai.com/client/html.zip",
-        "h5_resource_route_uri": "dahai://hybrid/moduleB",
+        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
+        "h5_resource_route_uri": "Test://hybrid/moduleB",
         "h5_resource_index": "/modules/test/test.html"
     }
 }
@@ -83,8 +83,8 @@ categories: ["iOS"]
         "h5_modul_id": "12345765432",
         "h5_resource_name": "serviceName",
         "h5_resource_version": "1.1",
-        "h5_resource_download_url": "http://cdn.dahai.com/client/html.zip",
-        "h5_resource_route_uri": "dahai://hybrid/moduleA",
+        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
+        "h5_resource_route_uri": "Test://hybrid/moduleA",
         "h5_resource_index": "/modules/test/test.html"
     }
 ```
@@ -99,14 +99,14 @@ h5_resource_index：资源中的入口地址
 ```objc
 // 查找
 __weak typeof(self) weakSelf = self;
-    [[DHSourseMap shareSourseMap] fileWithRoute:@"dahai://hybrid/moduleA" callBack:^(NSURL * _Nullable fileUrl, NSError * _Nullable error) {
+    [[DHSourseMap shareSourseMap] fileWithRoute:@"Test://hybrid/moduleA" callBack:^(NSURL * _Nullable fileUrl, NSError * _Nullable error) {
         NSLog(@"hybrid文件 FileUrl %@ if error %@", fileUrl, error);
         if (!error) {
             [weakSelf.webView loadFileURL:fileUrl allowingReadAccessToURL:fileUrl];
         }
     }];
 ```
-根据`dahai://hybrid/moduleA`中的moduleA，在配置文件中找到相应的moduleA，这样在文件管理中拼接处文件路径，
+根据`Test://hybrid/moduleA`中的moduleA，在配置文件中找到相应的moduleA，这样在文件管理中拼接处文件路径，
 `hybrid/moduleA/1.1/modules/test/test.html`
 
 文件管理查找到有这么文件，则回调给APP，APP加载`fileUrl`
