@@ -1,8 +1,8 @@
 #### hybrid资源管理
 
 ---
-title: "Hybrid案例学习"
-date: 2019-03-25T17:57:23+08:00
+title: "Hybrid资源管理"
+date: 2019-03-24T17:57:23+08:00
 lastmod: 2019-03-25T17:57:23:01+08:00
 draft: false
 tags: ["Hybrid"]
