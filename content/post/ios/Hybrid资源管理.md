@@ -21,32 +21,38 @@ categories: ["iOS"]
 配置文件内容如下：
 ```json
 {
-    "moduleA": {
+    "test_a": {
+        "h5_zip_md5" : "a514cdaf63a78cc454d07904493c3178",
         "h5_modul_id": "12345765432",
-        "h5_resource_name": "serviceName",
+        "h5_resource_name": "测试页面A",
         "h5_resource_version": "1.1",
-        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
-        "h5_resource_route_uri": "Test://hybrid/moduleA",
-        "h5_resource_index": "/modules/test/test.html"
+        "h5_resource_download_url": "http://packages.tdahai.com/hybrid/10086/15/10086_1.0.zip",
+        "h5_resource_route_uri": "dahai://hybrid/test_a",
     },
-    "moduleB": {
+    "test_b": {
+        "h5_zip_md5" : "a514cdaf63a78cc454d07904493c3178",
         "h5_modul_id": "12345760001",
-        "h5_resource_name": "serviceName",
-        "h5_resource_version": "1.0",
-        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
-        "h5_resource_route_uri": "Test://hybrid/moduleB",
-        "h5_resource_index": "/modules/test/test.html"
+        "h5_resource_name": "活动页面B",
+        "h5_resource_version": "1.2",
+        "h5_resource_download_url": "http://packages.tdahai.com/hybrid/10086/15/10086_1.0.zip",
+        "h5_resource_route_uri": "dahai://hybrid/test_b",
     }
 }
 ```
+类图如下：
+![资源管理类图.png](https://upload-images.jianshu.io/upload_images/273788-3708ca0197c835e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 每一个module是一个具体功能，对应一个zip压缩包，比如moduleA、moduleB，和`h5_resource_route_uri`字段下的module对应。每次下发的配置文件时全量的hybrid功能，不过不用担心，下载的时候只会下载和上次有变更的内容，这即是橙色部分的功能。会将上次拉取的配置文件和本次拉取的配置文件做比较，并生成一份和存储相对应的目录，下面会详细介绍。
 
 和APP交互的地方有两个：
 一是：APP启动的时候，指定配置文件下载地址，资源管理会按照配置文件进行更新。
-另一个是：APP在需要使用hybrid资源的时候，根据路由查找，及`h5_resource_route_uri`中定义的字段，先查找下发的配置文件，如果有相应的module，再去文件系统里查找是否有下载好的文件，则下载，下载完成解压后，`callback`查找到`fileUrl`给APP。
+另一个是：APP在需要使用hybrid资源的时候，根据路由查找，及`h5_resource_route_uri`中定义的字段，先查找下发的配置文件，如果有相应的module，再去文件系统里查找是否有下载好的文件，如果没有则下载，下载完成解压后，`callback`查找到的`fileUrl`给APP。
 
 这里贴一下存储在APP中的目录结构：
-![存储目录.png](https://upload-images.jianshu.io/upload_images/273788-6b7f818862cf730a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+iOS的目录结构：
+![iOS存储目录.png](https://upload-images.jianshu.io/upload_images/273788-f7bc238b32e5a9b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+Android的目录结构：
+<img src="https://upload-images.jianshu.io/upload_images/273788-dca83d2932769ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width = "275" height = "300" div align=center>
 
 文件存储在Documents下创建的hybrid中，hybrid里面存放着各个module，与之并列的是两个字典文件，`preJsonValue`里面是最新拉取的json配置里的数据。`preMergeValue`里存储着新旧两次合并之后的信息。使用`NSDictionary`自带存储方式即可
 ```objc
@@ -79,41 +85,42 @@ categories: ["iOS"]
 ##### 查找
 
 ```
-"moduleA": {
+"test_a": {
+        "h5_zip_md5" : "a514cdaf63a78cc454d07904493c3178",
         "h5_modul_id": "12345765432",
-        "h5_resource_name": "serviceName",
+        "h5_resource_name": "测试页面A",
         "h5_resource_version": "1.1",
-        "h5_resource_download_url": "http://cdn.XXX.com/client/html.zip",
-        "h5_resource_route_uri": "Test://hybrid/moduleA",
-        "h5_resource_index": "/modules/test/test.html"
+        "h5_resource_download_url": "http://packages.tdahai.com/hybrid/10086/15/10086_1.0.zip",
+        "h5_resource_route_uri": "dahai://hybrid/test_a",
     }
 ```
 ```
 h5_modul_id：资源文件唯一id，可以用作埋点
 h5_resource_name：功能名称
 h5_resource_version：版本号
-h5_resource_download_url：资源下载地址
+h5_resource_download_url：资源下载地址¢
 h5_resource_route_uri：用作路由
-h5_resource_index：资源中的入口地址
 ```
-```objc
-// 查找
-__weak typeof(self) weakSelf = self;
-    [[DHSourseMap shareSourseMap] fileWithRoute:@"Test://hybrid/moduleA" callBack:^(NSURL * _Nullable fileUrl, NSError * _Nullable error) {
-        NSLog(@"hybrid文件 FileUrl %@ if error %@", fileUrl, error);
-        if (!error) {
-            [weakSelf.webView loadFileURL:fileUrl allowingReadAccessToURL:fileUrl];
-        }
-    }];
+根据`Test://hybrid/moduleA`中的moduleA，在配置文件中找到相应的moduleA，
+此外注意存储目录下的`config.json`文件，里面的内容如下：
 ```
-根据`Test://hybrid/moduleA`中的moduleA，在配置文件中找到相应的moduleA，这样在文件管理中拼接处文件路径，
-`hybrid/moduleA/1.1/modules/test/test.html`
+{
+  "default_index": "/index.html",
+  "others_index": "/index.html",
+  "h5_version": "1.0",
+  "jssdk_version":"1.0.1"
+}
+```
+标识出了h5的入路径，这样就可以在文件管理中拼接出加载路径，
+`hybrid/moduleA/1.1/test_a/index.html`
 
-文件管理查找到有这么文件，则回调给APP，APP加载`fileUrl`
-如果没找到，则通过KVC告知下载模块系在，下载完成并解压后，再回调给APP，APP加载`fileUrl`
+文件管理查找到有这个文件，则回调路径给APP，APP加载`fileUrl`
+如果没找到，则通过KVC告知下载模块下载，下载完成并解压后，再回调给APP，APP加载`fileUrl`
 ```
 [weakSelf.webView loadFileURL:fileUrl allowingReadAccessToURL:fileUrl];
 ```
+流程如下：
+<img src="https://upload-images.jianshu.io/upload_images/273788-0a6c6c62d96fe05b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width = "320" height = "280" div align=center />
 
 如果有更好的思路或者错误欢迎指正、交流。
 
